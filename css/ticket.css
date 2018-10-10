@@ -1,0 +1,155 @@
+*{
+    font-family: Helvetica;
+}
+
+@media print {
+    #printseats{
+        color: #1D242F;
+    }
+}
+
+body{
+
+    margin: auto;
+}
+
+input[type=text],input[type=number]{
+border: 0.5px solid #1D242F;
+    background-color: #fff;
+    height: 30px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+input[type=button]{
+    cursor: pointer;
+    font-weight: bold;
+background-color: #5cb75c;
+}
+
+input[type=button]:hover{
+   background-color: #234c23 !important;
+    color: white !important;
+}
+
+
+input[type=button]:disabled{
+    cursor: not-allowed;
+    background-color: #fff;
+}
+
+input[type=text]:disabled,input[type=number]:disabled{
+    background-color: #fff;
+    /*border: 0.5px solid #e74f4b;*/
+    border: 0.5px solid black;
+    cursor: not-allowed;
+}
+
+#mainn{
+ margin: 0 12% 0 12%;
+    background-color: #27b6e7;
+}
+
+header{
+    text-align: center;
+    padding: 20px;
+    background-color: #27b6e7;
+    height: 30px;
+    border-bottom: #fff 1px solid;
+}
+
+header h2{
+    color:white;
+    margin-top: -5px;
+    font-size: 35px;
+}
+
+#spin{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    border-left: 10px solid #1E88E5;
+    border-top: 10px solid #FFC03A;
+    border-right: 10px solid #d1302c;
+    border-bottom: 10px solid #66c966;
+    border-radius: 50%;
+    animation: infinite spin 2s linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.inside{
+    display: flex;
+    margin:10px 5% 0 5%;
+    text-align: center;
+}
+
+.allocator{
+    background-color: #e74f4b;
+    padding: 50px;
+    text-align: center;
+    border: #fff 1px solid ;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.allocator h3{
+    margin-top: -20px;
+    color: #fff;
+}
+
+.h41{
+    margin-top: -20px;
+    color: #fff;
+}
+
+#no2,#naming{
+margin-top: -40px;
+}
+
+.h42{
+    color: #fff;
+}
+
+.buttons{
+    /*display: none;*/
+    margin: 10px 0 2px 0;
+    width: 150px;
+    border: 0.5px solid #e74f4b ;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+#arranger{
+    margin: 10px 0 2px 0;
+    width: 150px;
+    border: 0.5px solid #e74f4b ;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #5cb75c;
+    height: 90px;
+}
+
+#printseat{
+    width: auto;
+    background-color: white;
+}
+
+table{
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+#printingd{
+    text-align: center;
+}
+
+
+
+

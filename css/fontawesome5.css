@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "Font Awesome 5 Brands Regular";
+    src: url('../fonts/Font-Awesome-5-Brands.otf') format('');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Lato-Italic;
+    src: url('../fonts/Lato-Italic.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Lato-Regular;
+    src: url('../fonts/Lato-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+  <link rel="stylesheet" href="css/ticket.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/chakra.css">
+    <script type="text/javascript">
+		seatArray =[];
+		viewersName = "";
+		seatNumber = 0;
+        elements = ["no2","naming","allocatee","printfor","pfor","printt","printseat"];
+        numberOfSeat = 0;
+        ticketNumber = [];
+        ticketNo = 0;
+		function arrangeSeat(){
+            numberOfSeat = no1.value;
+            if(numberOfSeat == 1){
+                if(confirm("Are you sure you want to create " + numberOfSeat +" seat?")){
+
+                    for(i = 1; i <= numberOfSeat; i++){
+                        seatArray[i] = "";
+                    }
+                    for(u = 0; u < elements.length; u++){
+                        document.getElementById(elements[u]).removeAttribute("disabled");
+                    }
+                    document.getElementById("allocatee").style.display = "block";
+                    arranger();
+                }
+            }
+            else {
+                if (confirm("Are you sure you want to create " + numberOfSeat + " seats?")) {
+
+                    for (i = 1; i <= numberOfSeat; i++) {
+                        seatArray[i]= "";
+                    }
+                    for (u = 0; u < elements.length; u++) {
+                        document.getElementById(elements[u]).removeAttribute("disabled");
+                    }
+                    document.getElementById("allocatee").style.display = "block";
+                    arranger();
+                }
+            }
+		}
+
+
+		function arranger(){
+		    var counter = 0;
+
+		    var display = "<table  width=80% cellspacing='20px' align=center style='text-align: center;color:white' bgcolor='#1f1f1f'> <tr>";
+		    for(v = 1; v < seatArray.length; v++){
+		        display += "<td> <img src='images/chair.png'><br /><b>Seat: "+ v + "- " + seatArray[v]  +"</b></td>";
+		        ticketNumber[v];
+                counter++;
+
+                if(counter == 10){
+                    display += "</tr> <tr>";
+                    counter = 0;
+                }
+            }
+            display += "</tr></table> <p style='color: white;font-weight: bolder;text-align: center'>Cinema Seats Allocator 1.0 &copy; AGAPE Enterprises 2018.</p><br /><br />"
+            cinemaHall.innerHTML = display;
+        }
+
+        function allocator(){
+		    seatNumber = no2.value;
+		    viewersName = naming.value;
+
+
+
+		    if(seatArray[seatNumber] == undefined && seatArray.length == 2){
+                seatNumber = alert("The seats allocated are not upto " + seatNumber + ". It will be allocated to seat 1 instead. ");
+                no2.value = 1;
+		    }
+
+            else if(seatArray[seatNumber] == undefined){
+                seatNumber = prompt("The seats allocated are not upto " + seatNumber + ". Please enter a seat number between 1 and " + numberOfSeat);
+                no2.value = seatNumber;
+            }
+
+
+            else{
+                if(seatArray[seatNumber] !== "") {
+                    if (confirm("This seat is already owned by " + seatArray[seatNumber] + ". Do you really want a replacement?"))
+                    {
+                        prompting = prompt("Enter new name for seat " + seatNumber + " please");
+                        seatArray[seatNumber] = prompting;
+                        naming.value = prompting;
+                        ticketNo++;
+                        ticketNumber[seatNumber] = ticketNo;
+                        arranger();
+                        no2.value = "";
+                        naming.value = "";
+                        allocatee.value ="Allocate Seat";
+
+                    }
+
+                }
+                else{
+                    seatArray[seatNumber] = viewersName;
+                    ticketNo++;
+                    ticketNumber[seatNumber] = ticketNo;
+                    arranger();
+                    no2.value = "";
+                    naming.value = "";
+                    allocatee.value ="Allocate Seat";
+                }
+            }
+
+        }
+
+        function printer(){
+		    if(viewersName == "" && seatNumber == 0){
+		        alert("You have not allocated seats!")
+            }
+
+            else {
+                document.getElementById("mainn").style.display = "none";
+                document.getElementById("printingd").style.display = "block";
+                document.getElementById("printingd").innerHTML = "<html><head><title>Print Ticket</title></head><body><h1>Ogbomoso Mega Cinema</h1>"
+                    + "<div> <p>Thank you for purchasing the ticket</p><p> These are your booking details<br />" +
+                    "Your name is : " + viewersName.toUpperCase() + " <br />Your Seat Number is: " + seatNumber  +
+                    "<br /> Your Ticket Number is: " + ticketNo + " </p></div></body></html>";
+                print();
+                document.getElementById("printingd").style.display = "none";
+                document.getElementById("mainn").style.display = "block";
+            }
+        }
+
+        function printfor(){
+            pFoor = pfor.value;
+            pView = seatArray[pFoor];
+            if(seatArray[pFoor] == undefined){
+                alert("Seat " + pFoor + " is not available!")
+            }
+
+            else if(seatArray[pFoor] == ""){
+                alert("Seat " + pFoor + " has not been allocated!")
+            }
+		    else {
+
+                document.getElementById("mainn").style.display = "none";
+                document.getElementById("printingd").style.display = "block";
+                document.getElementById("printingd").innerHTML = "<html><head><title>Print Ticket</title></head><body>" +
+                    "<h1>Ogbomoso Mega Cinema</h1>"
+                    + "<div> <p>Thank you for purchasing the ticket</p><p> These are your booking details<br />" +
+                    "Your name is: " + pView.toUpperCase() + " <br />Your Seat Number is: " + pFoor + "<br /> " +
+                    "Your Ticket Number is: "  + ticketNumber[pFoor] + "</div></body></html>";
+                print();
+                document.getElementById("printingd").style.display = "none";
+                document.getElementById("mainn").style.display = "block";
+            }
+        }
+
+        function verify() {
+		    for(u = 0; u < elements.length; u++)
+            document.getElementById(elements[u]).setAttribute("disabled","disabled");
+        }
+
+        function viewerName() {
+            allocatee.value = "Allocate Seat " + no2.value + " for " + naming.value;
+        }
+
+        function printseats() {
+            document.getElementById("dashboard").style.display = "none";
+            print();
+            document.getElementById("dashboard").style.display = "block";
+        }
+
+	</script>
+</head>
+<body onload="verify()">
+<div id="mainn">
+    <div id="dashboard">
+    <header>
+        <h2 style="font-family:Lato"><a href="" onclick="windows.reset()"><span id="spin" style="margin-right: 20px"></span></a><span>&nbsp; &nbsp; &nbsp;GBOMOSO MEGA CINEMA </span></h2>
+    </header>
+    <div class="inside">
+    <div class="allocator">
+        <h3>Seat Allocator</h3>
+    <br />
+        <h4 class="h41">Enter Seat Number</h4>
+        <input type="number" min="1" name="no2" id="no2">
+        <h4 class="h42">Enter Viewer's Name</h4>
+        <input type="text" name="naming" id="naming" onkeyup="viewerName()">
+        <br />
+        <input type="button" value="Allocate Seat" id="allocatee" class="buttons" onclick="allocator()" style="text-align: left;width: auto">
+    </div>
+
+        <div class="allocator">
+            <h3 style="margin-top: 20px">Enter Number <br />of Seats</h3>
+            <br />
+            <input type="number"  min="1" name="no1" id="no1" style="background-color: white;height: 50px"/>
+            <br />
+            <input type="button"  id="arranger" name="arranger"  value="Arrange Seats" onclick="arrangeSeat()">
+            <br />
+            <input type="button" value="Print Seats Arrangement" id="printseat" class="buttons" onclick="printseats()">
+        </div>
+
+        <div class="allocator">
+            <h3>Ticket Printing</h3>
+            <br />
+            <h4 class="h41">Print New Ticket</h4>
+            <input type="button" value="Print Ticket" id="printt" onclick="printer()"  class="buttons" style="margin-top: -20px">
+
+            <h4 class="h42">Print For Seat</h4>
+            <input type="number" id="pfor" min="1" name="pfor">
+            <br />
+            <input type="button" value="Print Ticket" id="printfor" class="buttons" onclick="printfor()">
+        </div>
+
+    </div>
+    </div>
+
+    <br /><br/>
+<div id="cinemaHall"></div>
+</div>
+<div id="printingd"></div>
+</body>
+</html>
