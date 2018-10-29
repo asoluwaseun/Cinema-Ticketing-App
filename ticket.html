@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/chakra.css">
     <script type="text/javascript">
+        
 		seatArray =[];
 		viewersName = "";
 		seatNumber = 0;
@@ -13,7 +14,25 @@
         numberOfSeat = 0;
         ticketNumber = [];
         ticketNo = 0;
+       
+
+
+        window.addEventListener("load", loadseats);
+        function loadseats(){
+            retrieved1 = JSON.parse(localStorage.getItem("cinemaseats"));
+            retrieved2 = JSON.parse(localStorage.getItem("tickets"));
+            retrieved3 = JSON.parse(localStorage.getItem("ticketsno"));
+            if(retrieved1    != undefined){
+                seatArray    = retrieved1;
+                ticketNumber = retrieved2;
+                ticketNo     = retrieved3
+                arranger();
+            }
+           
+                
+        }
 		function arrangeSeat(){
+
             numberOfSeat = no1.value;
             if(numberOfSeat == 1){
                 if(confirm("Are you sure you want to create " + numberOfSeat +" seat?")){
@@ -92,6 +111,12 @@
                         no2.value = "";
                         naming.value = "";
                         allocatee.value ="Allocate Seat";
+                        storeTicket = JSON.stringify(seatArray);
+                        localStorage.setItem("cinemaseats",storeTicket);
+                        storeTicketNumber = JSON.stringify(ticketNumber);
+                        localStorage.setItem("tickets",storeTicketNumber);
+                        storeTicketNumber2 = JSON.stringify(ticketNo);
+                        localStorage.setItem("ticketsno",storeTicketNumber2);
 
                     }
 
@@ -104,6 +129,12 @@
                     no2.value = "";
                     naming.value = "";
                     allocatee.value ="Allocate Seat";
+                    storeTicket = JSON.stringify(seatArray);
+                        localStorage.setItem("cinemaseats",storeTicket);
+                        storeTicketNumber = JSON.stringify(ticketNumber);
+                        localStorage.setItem("tickets",storeTicketNumber);
+                        storeTicketNumber2 = JSON.stringify(ticketNo);
+                        localStorage.setItem("ticketsno",storeTicketNumber2);
                 }
             }
 
@@ -111,7 +142,7 @@
 
         function printer(){
 		    if(viewersName == "" && seatNumber == 0){
-		        alert("You have not allocated seats!")
+		        alert("You have not allocated seats today!")
             }
 
             else {
@@ -153,9 +184,16 @@
         }
 
         function verify() {
-		    for(u = 0; u < elements.length; u++)
+            if(retrieved1 != undefined){
+                
+            }
+            else{
+                for(u = 0; u < elements.length; u++){
             document.getElementById(elements[u]).setAttribute("disabled","disabled");
         }
+            }
+        }
+		    
 
         function viewerName() {
             allocatee.value = "Allocate Seat " + no2.value + " for " + naming.value;
